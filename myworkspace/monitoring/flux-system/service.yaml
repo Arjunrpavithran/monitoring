@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flux-metrics
+  namespace: flux-system
+  labels:
+    app: flux-metrics
+spec:
+  selector:
+    app: flux-system
+  ports:
+    - name: metrics
+      port: 9090
+      targetPort: 9090
