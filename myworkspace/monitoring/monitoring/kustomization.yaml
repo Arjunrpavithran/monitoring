@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- grafana_deployment.yaml
+- gragana_service.yaml
+- prometheus_deployment.yaml
+- prometheus_service.yaml
+- prometheus_configmap.yaml
+- nodexporter_deployment.yaml
+- nodexporter_service.yaml
+- cadvisor.yaml
