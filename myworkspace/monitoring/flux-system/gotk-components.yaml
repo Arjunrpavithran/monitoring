@@ -4862,6 +4862,7 @@ spec:
     spec:
       containers:
       - args:
+        - --metrics-addr=:9090
         - --events-addr=http://notification-controller.flux-system.svc.cluster.local./
         - --watch-all-namespaces=true
         - --log-level=info
