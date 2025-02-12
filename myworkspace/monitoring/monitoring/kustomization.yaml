@@ -6,6 +6,6 @@ resources:
 - promethues_deployment.yaml
 - promethues_service.yaml
 - promethues_configmap.yaml
-- nodexporter_deployment.yaml
-- nodexporter_service.yaml
+- nodeexporter_deployment.yaml
+- nodeexporter_service.yaml
 - cadvisor.yaml
