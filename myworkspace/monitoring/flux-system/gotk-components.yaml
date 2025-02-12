@@ -4906,7 +4906,7 @@ spec:
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: /
+            path: /metrics
             port: http
         resources:
           limits:
