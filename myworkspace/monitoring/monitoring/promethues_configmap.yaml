@@ -20,7 +20,9 @@ data:
             #metrics_path: '/metrics'
             #static_configs:
             #- targets: ['tempo.tempons.svc.cluster.local:3200']
-
+      - job_name: 'flux'
+        static_configs:
+          - targets: ['flux-metrics.flux-system.svc.cluster.local:9090']
       - job_name: 'minio'
     # Use Kubernetes service discovery to find MinIO endpoints
         kubernetes_sd_configs:
