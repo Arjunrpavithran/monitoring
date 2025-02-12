@@ -1,0 +1,63 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  endpoints:
+    - port: http-metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - flux-system
+  selector:
+    matchLabels:
+      app: source-controller
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: flux-system-kustomize
+  namespace: flux-system
+spec:
+  endpoints:
+    - port: http-metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - flux-system
+  selector:
+    matchLabels:
+      app: kustomize-controller
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: flux-system-helm
+  namespace: flux-system
+spec:
+  endpoints:
+    - port: http-metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - flux-system
+  selector:
+    matchLabels:
+      app: helm-controller
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: flux-system-notification
+  namespace: flux-system
+spec:
+  endpoints:
+    - port: http-metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - flux-system
+  selector:
+    matchLabels:
+      app: notification-controller
