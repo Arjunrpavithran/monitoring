@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
 - grafana_deployment.yaml
 - grafana_service.yaml
-- prometheus_deployment.yaml
-- prometheus_service.yaml
-- prometheus_configmap.yaml
+- promethues_deployment.yaml
+- promethues_service.yaml
+- promethues_configmap.yaml
 - nodexporter_deployment.yaml
 - nodexporter_service.yaml
 - cadvisor.yaml
