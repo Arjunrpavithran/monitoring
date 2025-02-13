@@ -4830,10 +4830,6 @@ spec:
     port: 80
     protocol: TCP
     targetPort: http
-  - name: metrics
-    port: 9090
-    protocol: TCP
-    targetPort: 9090
   selector:
     app: source-controller
   type: ClusterIP
@@ -4859,14 +4855,13 @@ spec:
   template:
     metadata:
       annotations:
-        prometheus.io/port: "9090"
+        prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
       labels:
         app: source-controller
     spec:
       containers:
       - args:
-        - --metrics-addr=:9090
         - --events-addr=http://notification-controller.flux-system.svc.cluster.local./
         - --watch-all-namespaces=true
         - --log-level=info
@@ -4895,8 +4890,8 @@ spec:
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
-            path: /metrics
-            port: 9090
+            path: /healthz
+            port: healthz
         name: manager
         ports:
         - containerPort: 9090
@@ -4910,8 +4905,8 @@ spec:
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: /metrics
-            port: 9090
+            path: /
+            port: http
         resources:
           limits:
             cpu: 1000m
