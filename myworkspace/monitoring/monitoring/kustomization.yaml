@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: monitoring
 resources:
 - namespace.yaml
+- cadvisor-serviceacc.yaml
 - grafana_deployment.yaml
 - grafana_service.yaml
 - promethues_deployment.yaml
