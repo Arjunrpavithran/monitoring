@@ -4855,7 +4855,7 @@ spec:
   template:
     metadata:
       annotations:
-        prometheus.io/port: "8080"
+        prometheus.io/port: "9090"
         prometheus.io/scrape: "true"
       labels:
         app: source-controller
@@ -4891,8 +4891,8 @@ spec:
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
-            path: /healthz
-            port: healthz
+            path: /metrics
+            port: http
         name: manager
         ports:
         - containerPort: 9090
@@ -4906,7 +4906,7 @@ spec:
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: /
+            path: /metrics
             port: http
         resources:
           limits:
