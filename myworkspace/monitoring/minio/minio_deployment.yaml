@@ -1,0 +1,60 @@
+# Persistent Volume Claim for MinIO
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-minio-fs-pvc
+  namespace: minio
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+# MinIO Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-minio-fs
+  namespace: minio
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-minio-fs
+  template:
+    metadata:
+      labels:
+        app: my-minio-fs
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/minio/v2/metrics/cluster"  # MinIO metrics endpoint
+        prometheus.io/port: "9000"
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: my-minio-fs-pvc
+      containers:
+      - name: my-minio-fs
+        #image: minio/minio:latest
+        image: quay.io/minio/minio:latest
+        command:
+          - /bin/bash
+          - -c
+        args:
+        - minio server /data --console-address :9050
+        env:
+        - name: MINIO_ACCESS_KEY
+          value: "minio"
+        - name: MINIO_SECRET_KEY
+          value: "minio123"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        ports:
+        - containerPort: 9000

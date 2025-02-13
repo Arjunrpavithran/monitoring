@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-minio-fs-service
+  namespace: minio
+spec:
+  selector:
+    app: my-minio-fs
+  ports:
+    - name: api-port
+      protocol: TCP
+      port: 9000
+      targetPort: 9000
+      nodePort: 31313
+    - name: console-port
+      protocol: TCP
+      port: 9050
+      targetPort: 9050
+      nodePort: 31414
+  type: NodePort
